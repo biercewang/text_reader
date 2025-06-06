@@ -23,7 +23,7 @@
 ## 依赖项
 
 - jieba：中文分词库
-- tkinter：GUI界面库（Python标准库）
+- tkinter：GUI界面库（Python 标准库，通常随 Python 安装）
 
 ## 安装步骤
 
@@ -34,7 +34,7 @@
 
 2. 安装依赖：
 
-    pip install jieba
+    pip install -r requirements.txt
 
 ## 使用方法
 
