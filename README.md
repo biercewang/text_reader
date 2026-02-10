@@ -1,8 +1,17 @@
-# 中文速读器
+# 中文速读器 + MSFT 实时股票分析工具
+
+本仓库现在包含两个独立工具：
+
+1. **中文速读器（GUI）**：使用 Python + Tkinter 开发，帮助进行中文快速阅读训练。
+2. **微软股票实时分析工具（CLI）**：实时获取微软（`MSFT`）行情并计算常用技术指标，便于后续量化分析。
+
+---
+
+## 1) 中文速读器
 
 一个简单的中文速读工具，使用 Python 和 Tkinter 开发。帮助提高阅读速度和理解能力。
 
-## 功能特点
+### 功能特点
 
 - 支持中文文本分词和智能组词
 - 可调节阅读速度（词/分钟）
@@ -15,49 +24,80 @@
 - 支持暂停、继续和停止功能
 - 界面简洁，操作直观
 
-## 系统要求
+### 系统要求
 
 - 操作系统：Windows/MacOS/Linux
 - Python 3.6+
 
-## 依赖项
+### 依赖项
 
 - jieba：中文分词库
 - tkinter：GUI界面库（Python标准库）
 
-## 安装步骤
+### 使用方法
 
-1. 克隆仓库：
+```bash
+pip install jieba
+python main.py
+```
 
-    git clone https://github.com/biercewang/text_reader.git
-    cd text_reader
+---
 
-2. 安装依赖：
+## 2) 微软（MSFT）实时股票分析工具
 
-    pip install jieba
+文件：`msft_realtime_analyzer.py`
 
-## 使用方法
+### 功能
 
-1. 运行程序：
+- 实时拉取微软 `MSFT` 行情（Yahoo Finance 公共接口）
+- 输出实时价格、涨跌额、涨跌幅
+- 同时计算并输出常用技术指标：
+  - `SMA5`
+  - `SMA20`
+  - `EMA12`
+  - `RSI14`
+- 可选保存为 CSV，便于后续用 Pandas / Excel / BI 工具做深入分析
 
-    python main.py
+### 快速开始
 
-2. 使用说明：
-   - 在文本框中输入或粘贴要阅读的文本
-   - 调整阅读速度（默认300词/分钟）
-   - 可选择字体、字号和颜色
-   - 点击开始按钮或按空格键开始阅读
-   - 使用键盘快捷键控制阅读进度
+```bash
+python msft_realtime_analyzer.py --interval 5 --samples 60
+```
 
-## 注意事项
+参数说明：
 
-- 建议从较低速度开始练习，逐步提高
-- 可以使用空格键随时暂停，方便理解重要内容
-- 如果速度过快，可以使用下箭头键降低速度
+- `--interval`：刷新间隔秒数，默认 `5`
+- `--samples`：采样次数，默认 `120`
+- `--csv`：输出 CSV 文件路径（可选）
 
-## 贡献
+示例：
 
-欢迎提交 Issue 和 Pull Request 来帮助改进项目。
+```bash
+python msft_realtime_analyzer.py --interval 3 --samples 100 --csv data/msft_live.csv
+```
+
+### 输出示例
+
+```text
+[2026-01-01 22:31:15] MSFT 价格: 430.25 USD | 涨跌: +1.52 (+0.35%)
+  指标 -> SMA5: 429.81 SMA20: 427.90 EMA12: 429.44 RSI14: 62.03
+```
+
+### 适合的分析场景
+
+- 盘中波动观察
+- 技术指标实时信号监控
+- 为后续策略回测积累近实时数据样本
+
+---
+
+## 测试
+
+```bash
+python -m unittest -v
+```
+
+---
 
 ## 许可证
 
